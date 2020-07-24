@@ -7,4 +7,5 @@
 #include "operationfile.h"
 #include "filedistance.h"
 void apply(vkey_t* x, char *filem, char *resultm);
+char* generateStringOriginaria(vkey_t *x);
 #endif //FILEDISTANCE_APPLYMODIFY_H
