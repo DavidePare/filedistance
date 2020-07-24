@@ -27,12 +27,9 @@ listafile_t* searchfileintosub(char *subdir, listafile_t *first , listafile_t *l
     struct dirent *de;
     DIR *dr = opendir(directory);
     char *subdirapp=malloc(strlen(directory)+1);
+    if(subdirapp == NULL) exit(1);
     strcpy(subdirapp,directory);
-    if (dr == NULL)  // opendir returns NULL if couldn't open directory
-    {
-        printf("Could not open current directory\n " );
-        exit(1);
-    }
+    if(dr == NULL) exit(1);
     else {
         while ((de = readdir(dr)) != NULL){
             if(de->d_type==DT_REG) {
@@ -46,9 +43,11 @@ listafile_t* searchfileintosub(char *subdir, listafile_t *first , listafile_t *l
             }
             if(de->d_type==DT_DIR) {
                 subdir = realloc(subdir, sizeof(char) * strlen(directory) + sizeof(char) * strlen(de->d_name) + 2);
-                if(subdir == NULL) exit(8);
+                if(subdir == NULL)      exit(1);
                 if(strstr(directory,firstdir)) strcpy(subdir, directory);
                 else strcpy(directory,subdirapp);
+               /* if(strcmp(directory,"") ==0) strcpy(subdir,directory);
+                else strcpy(directory,subdirapp);*/
                 strncat(subdir, de->d_name, strlen(de->d_name));
                 strcat(subdir, "/");
                 last = searchfileintosub(subdir, first, last, subdir,firstdir);
@@ -85,7 +84,6 @@ listafile_t * create_path_stringa(char *path, char *direct){
 
 void calculatedistancelist(listafile_t *lista,char *file){
     listafile_t *first= lista;
-
     do{
         lista->distanza= Levenshtein_distance(load_file(file),load_file(lista->nome));
         lista=lista->next;

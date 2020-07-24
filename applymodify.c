@@ -24,6 +24,7 @@ void apply(vkey_t* x, char *filem, char *resultm){
     saveintofile(stringOriginaria,resultm);
     free(stringOriginaria);
 }
+
 char *applyoperation(FILE *fp, char *stringOriginaria,char *stringAppoggio, vOption_t *app){
     while(!feof(fp)) {
         fscanf(fp,"%03s%10u%hhu\n", app->istruction, &app->posizione, &app->imposta);
@@ -34,11 +35,13 @@ char *applyoperation(FILE *fp, char *stringOriginaria,char *stringAppoggio, vOpt
             if(strlen(stringOriginaria)==0) continue ;
             char *p=realloc(stringAppoggio,sizeof(char)*strlen(stringOriginaria)+1);
             if(!p) exit(0);
-            else stringAppoggio=p;
+            stringAppoggio=p;
             stringOriginaria=deloperation(stringAppoggio,stringOriginaria,app);
         }
         else if(strcmp(app->istruction,"ADD") ==0){
-            stringAppoggio=realloc(stringAppoggio,sizeof(char)*strlen(stringOriginaria)+3);
+            char *p=realloc(stringAppoggio,sizeof(char)*strlen(stringOriginaria)+3);
+            if(p == NULL) exit(1);
+            stringAppoggio=p;
             stringOriginaria=addoperation(stringAppoggio,stringOriginaria,app);
         }
         else if(strcmp(app->istruction,"SET")==0){
@@ -48,8 +51,8 @@ char *applyoperation(FILE *fp, char *stringOriginaria,char *stringAppoggio, vOpt
     free(stringAppoggio);
     return stringOriginaria;
 }
-char *deloperation(char *stringAppoggio,char *stringOriginaria,vOption_t *app){
 
+char *deloperation(char *stringAppoggio,char *stringOriginaria,vOption_t *app){
     char *p=realloc(stringOriginaria,sizeof(char)*strlen(stringOriginaria)+1);
     if(!p) exit(0);
     stringOriginaria=p;
@@ -74,6 +77,7 @@ char *addoperation(char * stringAppoggio, char *stringOriginaria, vOption_t *app
     memset(stringAppoggio,'\0',strlen(stringAppoggio));
     return stringOriginaria;
 }
+
 char *generateStringOriginaria(vkey_t *x){
     char *stringOriginaria;
     if(x->block!= NULL) stringOriginaria=generatestring(x);
