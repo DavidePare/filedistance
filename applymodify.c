@@ -17,6 +17,9 @@ void apply(vkey_t* x, char *filem, char *resultm){
     fp= fopen(filem,"r");
     if(fp== NULL) exit(0);
     vOption_t *app=malloc(sizeof(vOption_t));
+    if(app ==NULL) exit(1);
+    app->istruction=malloc(sizeof(char)*4);
+    if(app->istruction == NULL) exit(1);
     stringAppoggio = malloc(strlen(stringOriginaria)+1);
     stringOriginaria=applyoperation(fp,stringOriginaria,stringAppoggio,app);
     stringOriginaria[strlen(stringOriginaria)]='\0';

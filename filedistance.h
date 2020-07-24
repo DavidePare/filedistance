@@ -8,7 +8,7 @@
 #include "applymodify.h"
 typedef unsigned char byte; // 0 - 255 1 BYTE
 typedef struct vOption{
-    char istruction[3];         //WHEN WE READ FROM FILE WE MUST DO SCANF("%03s")
+    char *istruction;         //WHEN WE READ FROM FILE WE MUST DO SCANF("%03s")
     unsigned int posizione;         //4 BYTE
     byte imposta;               // cosi abbiamo una variabile che assume valori da 0 a 255 --> 8 bit -> 1 byte
 }vOption_t;

@@ -10,6 +10,8 @@ void printActualEdits(int **matrix, char *str1, char *str2,int i, int j,char * f
     vOption_t *app;
     app = malloc(sizeof(vOption_t));
     if(app== NULL)  exit(1);
+    app->istruction=malloc(sizeof(char)*4);
+    if(app->istruction == NULL) exit(1);
     FILE *fp;
     fp= fopen(filesave, "wt");
     if(fp == NULL)  exit(1);
@@ -18,7 +20,7 @@ void printActualEdits(int **matrix, char *str1, char *str2,int i, int j,char * f
         else{
             calculateInternalMatrix(matrix,app,str1,str2,&i,&j,fp);
             }
-        }
+    }
     fclose(fp);
 }
 
