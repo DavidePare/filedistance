@@ -46,8 +46,6 @@ listafile_t* searchfileintosub(char *subdir, listafile_t *first , listafile_t *l
                 p = realloc(subdir, sizeof(char) * strlen(directory) + sizeof(char) * strlen(de->d_name) + 3);
                 if(p == NULL)      exit(1);
                 else subdir=p;
-               /* if(strstr(directory,firstdir)) strcpy(subdir, directory);
-                else strcpy(directory,subdirapp);*/
                 if(strcmp(directory,"") ==0) strcpy(subdir,directory);
                 else strcpy(directory,subdirapp);
                 strcpy(subdir,subdirapp);
@@ -58,7 +56,6 @@ listafile_t* searchfileintosub(char *subdir, listafile_t *first , listafile_t *l
             }
         }
         closedir(dr);
-        //free(subdirapp);
     }
     return first;
 }
