@@ -58,7 +58,7 @@ listafile_t* searchfileintosub(char *subdir, listafile_t *first , listafile_t *l
             }
         }
         closedir(dr);
-        free(subdirapp);
+        //free(subdirapp);
     }
     return first;
 }
