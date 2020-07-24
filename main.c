@@ -52,7 +52,8 @@ void distancefunction(char *fileA , char *fileB ,char *fileM, int paramaterNumbe
 }
 
 void searchallfunction(char *filedist,char *path,int limit){
-    listafile_t *lista=malloc(sizeof(char));
+    listafile_t *lista=malloc(sizeof(listafile_t));
+    lista->nome =NULL;
     lista=fileindir(lista,path); // if argv[4] is a character or string it would be NULL and it will considereted 0
     calculatedistancelist(lista,filedist);
     orderlist(lista);
@@ -61,7 +62,8 @@ void searchallfunction(char *filedist,char *path,int limit){
 }
 
 void searchfunction(char *file, char *path){
-    listafile_t *lista=malloc(sizeof(char));
+    listafile_t *lista=malloc(sizeof(listafile_t));
+    lista->nome=NULL;
     lista=fileindir(lista,path);
     int minimo=findminlist(lista,file);
     printmindistance(lista,minimo);
