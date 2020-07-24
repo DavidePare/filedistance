@@ -15,4 +15,5 @@ void endStringB(vOption_t *app,int *i,int *j,FILE *fp);
 void writeSetIntoFile(vOption_t *app, char carattere, int posizione, int **i,int **j);
 void writeDelIntoFile(vOption_t *app, char carattere, int posizione, int **i,int **j);
 void writeAddIntoFile(vOption_t *app, char carattere, int posizione, int **i,int **j);
+void calculateInternalMatrix(int **matrix,vOption_t *app, char *str1, char *str2, int *i,int *j,FILE *fp);
 #endif //FILEDISTANCE_GENERATEFILEM_H

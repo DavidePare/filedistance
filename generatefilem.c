@@ -17,6 +17,8 @@ void printActualEdits(int **matrix, char *str1, char *str2,int i, int j,char * f
     while(i != 0 || j != 0) {
         if(i==0 || j==0) finishAString(app,str1,str2,&i,&j,fp);
         else{
+            calculateInternalMatrix(matrix,app,str1,str2,&i,&j,fp);
+            /*
             if (str1[i - 1] == str2[j - 1]) {
                 i--;
                 j--;
@@ -29,9 +31,29 @@ void printActualEdits(int **matrix, char *str1, char *str2,int i, int j,char * f
                 } else if (matrix[i][j] == matrix[i][j - 1] + 1) {
                     impostadati(app, 2, str2[j - 1], i, &i, &j);
                 }
-                saveappintofile(fp, app);
+                saveappintofile(fp, app);*/
             }
         }
+}
+
+
+void calculateInternalMatrix(int **matrix,vOption_t *app, char *str1, char *str2, int *i,int *j,FILE *fp){
+
+    if (str1[*i - 1] == str2[*j - 1]) {
+        (*i)--;
+        (*j)--;
+    } else {
+        if (matrix[*i][*j] == matrix[*i - 1][*j - 1] + 1) {
+            writeSetIntoFile(app, str2[*j - 1], *i - 1, &i, &j);
+            //  impostadati(app, 0, str2[*j - 1], *i - 1,i,j);
+        } else if (matrix[*i][*j] == matrix[*i - 1][*j] + 1) {
+            writeDelIntoFile(app, 32, *i - 1, &i, &j);
+            // impostadati(app, 1, ' ', *i - 1,&i,&j);
+        } else if (matrix[*i][*j] == matrix[*i][*j - 1] + 1) {
+            writeAddIntoFile(app, str2[*j - 1], *i, &i, &j);
+            //impostadati(app, 2, str2[*j - 1], *i, &i, &j);
+        }
+        saveappintofile(fp, app);
     }
 }
 
