@@ -13,7 +13,6 @@ void printActualEdits(int **matrix, char *str1, char *str2,int i, int j,char * f
     FILE *fp;
     fp= fopen(filesave, "wt");
     if(fp == NULL)  exit(1);
- //   calculatefilem(matrix,str1,str2,i,j,filesave);
     while(i != 0 || j != 0) {
         if(i==0 || j==0) finishAString(app,str1,str2,&i,&j,fp);
         else{

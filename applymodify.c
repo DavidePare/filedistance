@@ -19,27 +19,6 @@ void apply(vkey_t* x, char *filem, char *resultm){
     vOption_t *app=malloc(sizeof(vOption_t));
     stringAppoggio = malloc(strlen(stringOriginaria)+1);
     stringOriginaria=applyoperation(fp,stringOriginaria,stringAppoggio,app);
-   /* while(!feof(fp)) {
-        fscanf(fp,"%03s%10u%hhu\n", app->istruction, &app->posizione, &app->imposta);
-        if(app->posizione>strlen(stringOriginaria)){
-            app->posizione=strlen(stringOriginaria)-1;
-        }
-        if(strcmp(app->istruction,"DEL") ==0) {
-            if(strlen(stringOriginaria)==0) continue ;
-            char *p=realloc(stringAppoggio,sizeof(char)*strlen(stringOriginaria)+1);
-            if(!p) exit(0);
-            else stringAppoggio=p;
-            stringOriginaria=deloperation(stringAppoggio,stringOriginaria,app);
-        }
-        else if(strcmp(app->istruction,"ADD") ==0){
-
-            stringAppoggio=realloc(stringAppoggio,sizeof(char)*strlen(stringOriginaria)+3);
-            stringOriginaria=addoperation(stringAppoggio,stringOriginaria,app);
-        }
-        else if(strcmp(app->istruction,"SET")==0){
-            stringOriginaria[app->posizione]=(char)app->imposta;
-        }
-    }*/
     stringOriginaria[strlen(stringOriginaria)]='\0';
     fclose(fp);
     saveintofile(stringOriginaria,resultm);
