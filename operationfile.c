@@ -13,7 +13,6 @@ char* getblocco(vkey_t* key){
 
 vkey_t* create_key(vblock_t* first){
     vkey_t *key =malloc(sizeof(vkey_t));
-    //key->index=0;
     key->block=first;
     return key;
 }
@@ -42,7 +41,6 @@ vkey_t* load_file(char* file){
     FILE *fin;
     fin=fopen(file, "r");
     if(fin== NULL){
-        // printf("%s",file);
         perror("Si e verificato un errore");
         exit(1);
     }

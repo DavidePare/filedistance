@@ -8,7 +8,7 @@
 #include <limits.h>
 #include "filedistance.h"
 #include "filepath.h"
-listafile_t* searchfileintosub(char *subdir, listafile_t *first , listafile_t *last,char *directory );
+listafile_t* searchfileintosub(char *subdir, listafile_t *first , listafile_t *last,char *directory ,char * firstdir);
 void generateblock(listafile_t **first, listafile_t **last, char *path, char *direct);
 listafile_t * create_path_stringa(char *path , char *direct);
 
@@ -16,12 +16,14 @@ listafile_t * create_path_stringa(char *path , char *direct);
 
 listafile_t* fileindir(listafile_t *file ,char *directory){
     char *subdir=NULL;
-    listafile_t* first=searchfileintosub(subdir,file,file,directory);
+    char *firstdir=malloc(sizeof(char)*strlen(directory)+1);
+    strncpy(firstdir,directory,strlen(directory)+1);
+    listafile_t* first=searchfileintosub(subdir,file,file,directory,firstdir);
     free(subdir);
     return first;
 }
 
-listafile_t* searchfileintosub(char *subdir, listafile_t *first , listafile_t *last,char *directory ){
+listafile_t* searchfileintosub(char *subdir, listafile_t *first , listafile_t *last,char *directory,char *firstdir){
     struct dirent *de;
     DIR *dr = opendir(directory);
     char *subdirapp=malloc(strlen(directory)+1);
@@ -44,11 +46,12 @@ listafile_t* searchfileintosub(char *subdir, listafile_t *first , listafile_t *l
             }
             if(de->d_type==DT_DIR) {
                 subdir = realloc(subdir, sizeof(char) * strlen(directory) + sizeof(char) * strlen(de->d_name) + 2);
-                if(strcmp(directory,"") !=0) strcpy(subdir, directory);
+                if(subdir == NULL) exit(8);
+                if(/*strcmp(directory,"") !=0 ||*/ strstr(directory,firstdir)) strcpy(subdir, directory);
                 else strcpy(directory,subdirapp);
                 strncat(subdir, de->d_name, strlen(de->d_name));
                 strcat(subdir, "/");
-                last = searchfileintosub(subdir, first, last, subdir);
+                last = searchfileintosub(subdir, first, last, subdir,firstdir);
                 strcpy(directory,subdirapp);
             }
         }
@@ -71,7 +74,9 @@ void generateblock(listafile_t **first, listafile_t **last, char *path, char *di
 
 listafile_t * create_path_stringa(char *path, char *direct){
     listafile_t *new_block= malloc(sizeof(listafile_t)+1);
+    if(new_block == NULL) exit(0);
     new_block->nome=malloc(sizeof(char)*strlen(direct)+strlen(path)+1);
+    if(new_block->nome == NULL) exit(0);
     strcpy(new_block->nome,path);
     strcat(new_block->nome,direct);
     new_block->next= NULL;

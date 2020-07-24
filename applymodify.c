@@ -22,7 +22,7 @@ void apply(vkey_t* x, char *filem, char *resultm){
         exit(0);
     }
     vOption_t *app=malloc(sizeof(vOption_t));
-    stringAppoggio = malloc(strlen(stringOriginaria));
+    stringAppoggio = malloc(strlen(stringOriginaria)+1);
     while(!feof(fp)) {
         fscanf(fp,"%03s%10u%hhu\n", app->istruction, &app->posizione, &app->imposta);
         if(app->posizione>strlen(stringOriginaria)){

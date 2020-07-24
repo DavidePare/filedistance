@@ -10,6 +10,7 @@
 #include "utility.h"
 #include "generatefilem.h"
 
+void dealloclist(vkey_t *x);
 
 int Levenshtein_distance(vkey_t *x, vkey_t* y){
     int distance;
@@ -126,9 +127,22 @@ char *generatestring(vkey_t *x) {
         else strcat(s1, x->block->key);
         x->block = x->block->next;
     } while (appuno != x->block);
-    free(x);
-    free(appuno);
+    dealloclist(x);
+  //  free(appuno);
     return s1;
 }
 
 
+
+
+void dealloclist(vkey_t *x){
+    vblock_t *primo=malloc(sizeof(vblock_t));
+    vblock_t *appoggio=malloc(sizeof(vblock_t));
+    primo=x->block;
+    do{
+        appoggio=primo->next;
+        free(primo);
+        primo=appoggio;
+    }while(appoggio->next!=x->block);
+    free(x);
+}

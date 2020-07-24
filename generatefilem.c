@@ -18,60 +18,28 @@ void printActualEdits(int **matrix, char *str1, char *str2,int i, int j,char * f
         if(i==0 || j==0) finishAString(app,str1,str2,&i,&j,fp);
         else{
             calculateInternalMatrix(matrix,app,str1,str2,&i,&j,fp);
-            /*
-            if (str1[i - 1] == str2[j - 1]) {
-                i--;
-                j--;
-            } else{
-                if (matrix[i][j] == matrix[i - 1][j - 1] + 1) {
-                    impostadati(app, 0, str2[j - 1], i - 1,&i,&j);
-                }
-                else if (matrix[i][j] == matrix[i - 1][j] + 1) {
-                    impostadati(app, 1, ' ', i - 1,&i,&j);
-                } else if (matrix[i][j] == matrix[i][j - 1] + 1) {
-                    impostadati(app, 2, str2[j - 1], i, &i, &j);
-                }
-                saveappintofile(fp, app);*/
             }
         }
+    fclose(fp);
 }
 
 
 void calculateInternalMatrix(int **matrix,vOption_t *app, char *str1, char *str2, int *i,int *j,FILE *fp){
-
     if (str1[*i - 1] == str2[*j - 1]) {
         (*i)--;
         (*j)--;
     } else {
         if (matrix[*i][*j] == matrix[*i - 1][*j - 1] + 1) {
             writeSetIntoFile(app, str2[*j - 1], *i - 1, &i, &j);
-            //  impostadati(app, 0, str2[*j - 1], *i - 1,i,j);
         } else if (matrix[*i][*j] == matrix[*i - 1][*j] + 1) {
             writeDelIntoFile(app, 32, *i - 1, &i, &j);
-            // impostadati(app, 1, ' ', *i - 1,&i,&j);
         } else if (matrix[*i][*j] == matrix[*i][*j - 1] + 1) {
             writeAddIntoFile(app, str2[*j - 1], *i, &i, &j);
-            //impostadati(app, 2, str2[*j - 1], *i, &i, &j);
         }
         saveappintofile(fp, app);
     }
 }
 
-void impostadati(vOption_t *app, int opzione, char carattere, int posizione, int *i,int *j){
-    switch(opzione){
-        case 0:
-            writeSetIntoFile(app,carattere,posizione,&i,&j);
-            break;
-        case 1:
-            writeDelIntoFile(app,carattere,posizione,&i,&j);
-            break;
-        case 2:
-            writeAddIntoFile(app,carattere,posizione,&i,&j);
-            break;
-        default:
-            break;
-    }
-}
 
 void writeSetIntoFile(vOption_t *app, char carattere, int posizione, int **i,int **j){
     memcpy(app->istruction,"SET\0",4);
