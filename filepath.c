@@ -94,7 +94,6 @@ void calculatedistancelist(listafile_t *lista,char *file){
 void printlimitdistance(listafile_t *lista, int limit){
     listafile_t *first=lista;
     do{
-        //distanza + pathassoluto
         if(lista->distanza<=limit) printf("%d %s \n",lista->distanza,lista->nome);
         else break;
         lista=lista->next;
@@ -115,7 +114,6 @@ void printmindistance(listafile_t *lista, int minimo){
     listafile_t *first=lista;
     do{
         if(lista->distanza==minimo) printf("%d %s\n",lista->distanza,lista->nome);
-        //   else printf("NON È MINIMIO PATH :%s DISTANZA: %d \n",lista->nome,lista->distanza);
         lista=lista->next;
     }while(lista!=first);
 }

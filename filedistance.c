@@ -134,15 +134,16 @@ char *generatestring(vkey_t *x) {
 
 
 
-
 void dealloclist(vkey_t *x){
-    vblock_t *primo=malloc(sizeof(vblock_t));
-    vblock_t *appoggio=malloc(sizeof(vblock_t));
-    primo=x->block;
-    do{
-        appoggio=primo->next;
+    vblock_t *primo;
+    vblock_t *appoggio=x->block->next;
+    vblock_t prova=*x->block;
+    primo=x->block->next;
+    while(appoggio->next != prova.next){
+        appoggio = primo->next;
         free(primo);
-        primo=appoggio;
-    }while(appoggio->next!=x->block);
+        primo = appoggio;
+    };
+   // }while((*(appoggio->next)) != prova);
     free(x);
 }

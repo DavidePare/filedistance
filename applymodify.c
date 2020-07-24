@@ -22,7 +22,6 @@ void apply(vkey_t* x, char *filem, char *resultm){
     stringOriginaria[strlen(stringOriginaria)]='\0';
     fclose(fp);
     saveintofile(stringOriginaria,resultm);
-    free(stringAppoggio);
     free(stringOriginaria);
 }
 char *applyoperation(FILE *fp, char *stringOriginaria,char *stringAppoggio, vOption_t *app){
@@ -46,6 +45,7 @@ char *applyoperation(FILE *fp, char *stringOriginaria,char *stringAppoggio, vOpt
             stringOriginaria[app->posizione]=(char)app->imposta;
         }
     }
+    free(stringAppoggio);
     return stringOriginaria;
 }
 char *deloperation(char *stringAppoggio,char *stringOriginaria,vOption_t *app){
