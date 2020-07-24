@@ -9,6 +9,10 @@ void printActualEdits(int **matrix, char *str1, char *str2,int i , int j,char * 
 void impostadati(vOption_t *app, int opzione, char carattere, int posizione, int *i,int *j);
 void saveappintofile(FILE *fp, vOption_t *app);
 void finishAString(vOption_t *app, char *str1, char *str2, int *i, int *j, FILE *fp);
-void endStringA(vOption_t *app, char *strA, char *strB, int *i,int *j,FILE *fp);
-void endStringB(vOption_t *app, char *strA, char *strB, int *i,int *j,FILE *fp);
+void endStringA(vOption_t *app, char *strB, int *i,int *j,FILE *fp);
+void endStringB(vOption_t *app,int *i,int *j,FILE *fp);
+
+void writeSetIntoFile(vOption_t *app, char carattere, int posizione, int **i,int **j);
+void writeDelIntoFile(vOption_t *app, char carattere, int posizione, int **i,int **j);
+void writeAddIntoFile(vOption_t *app, char carattere, int posizione, int **i,int **j);
 #endif //FILEDISTANCE_GENERATEFILEM_H

@@ -11,7 +11,7 @@
 #include "generatefilem.h"
 
 
-int Levenshtein_distance(vkey_t *x, vkey_t* y) {
+int Levenshtein_distance(vkey_t *x, vkey_t* y){
     int distance;
     char *s1, *s2;
     if(x->block==NULL && y->block==NULL) return 0;
@@ -53,7 +53,7 @@ int Levenshtein_distance_Modify(vkey_t *x,vkey_t *y, char *filesave){
 
 
 
-int WagnerFischer_Alg(char *stringA, char *stringB, int m, int n) {
+int WagnerFischer_Alg(char *stringA, char *stringB, int m, int n){
     int **matrix=NULL;
     int lcs;
     matrix=inizializzatematrix(matrix,m,n);
@@ -62,7 +62,7 @@ int WagnerFischer_Alg(char *stringA, char *stringB, int m, int n) {
     return lcs;
 }
 
-int WagnerFischer_Alg_Modify(char *stringA, char *stringB, int m, int n, char *filesave) {
+int WagnerFischer_Alg_Modify(char *stringA, char *stringB, int m, int n, char *filesave){
     int **matrix=NULL;
     int lcs;
     matrix=inizializzatematrix(matrix,m,n);

@@ -35,7 +35,6 @@ void apply(vkey_t* x, char *filem, char *resultm){
             else stringAppoggio=p;
             stringOriginaria=deloperation(stringAppoggio,stringOriginaria,app);
         }
-
         else if(strcmp(app->istruction,"ADD") ==0){
 
             stringAppoggio=realloc(stringAppoggio,sizeof(char)*strlen(stringOriginaria)+3);
