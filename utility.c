@@ -15,9 +15,8 @@ int min(int x,int y){
 void menuCommand(){
     printf("Different Features: \n");
     printf("   -h or --help command to see al command \n");
-    printf("   -v or --version command to see the version of software \n");
-    printf("   filedistance distance file1 file2, distance is how u must pass \n");
-    printf("   filedistance apply inputfile filem outputfile , inputfile is the file where u apply the filem that contains the different options and save result in outputfile \n");
+    printf("   filedistance distance file1 file2  \n");
+    printf("   filedistance apply inputfile filem outputfile \n");
     printf("   filedistance search inputfile dir \n");
     printf("   filedistance searchall inputfile dir limit \n");
 }
@@ -76,7 +75,7 @@ void distancefunction(char *fileA , char *fileB ,char *fileM, int paramaterNumbe
 void searchallfunction(char *filedist,char *path,int limit){
     listafile_t *lista=malloc(sizeof(listafile_t));
     lista->nome =NULL;
-    lista=fileindir(lista,path); // if argv[4] is a character or string it would be NULL and it will considereted 0
+    lista=fileindir(lista,path);
     calculatedistancelist(lista,filedist);
     orderlist(lista);
     printlimitdistance(lista,limit);

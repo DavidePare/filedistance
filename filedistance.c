@@ -30,9 +30,6 @@ int Levenshtein_distance(vkey_t *x, vkey_t* y){
     return distance;
 }
 
-/*
- * Da ricontrollare inserimento stringhe vuote modifica apportata 15/06
- */
 int Levenshtein_distance_Modify(vkey_t *x,vkey_t *y, char *filesave){
     int distance;
     char *s1, *s2;
