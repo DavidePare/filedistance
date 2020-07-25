@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
+void dealloclistname(listafile_t *lista);
 int min(int x,int y){
     if(x>y) return y;
     else return x;
@@ -57,4 +59,49 @@ int max(int x, int y){
     return y;
 }
 
+void distancefunction(char *fileA , char *fileB ,char *fileM, int paramaterNumber){
+    int distance=0;
+    clock_t begin = clock();
+    if(paramaterNumber==4){
+        distance= Levenshtein_distance(load_file(fileA),load_file(fileB));
+    }
+    if(paramaterNumber==5){
+        distance=Levenshtein_distance_Modify(load_file(fileA),load_file(fileB),fileM);
+    }
+    clock_t end = clock();
+    double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+    printf("EDIT DISTANCE: %d \nTIME: %lf \n",distance,time_spent);
+}
 
+void searchallfunction(char *filedist,char *path,int limit){
+    listafile_t *lista=malloc(sizeof(listafile_t));
+    lista->nome =NULL;
+    lista=fileindir(lista,path); // if argv[4] is a character or string it would be NULL and it will considereted 0
+    calculatedistancelist(lista,filedist);
+    orderlist(lista);
+    printlimitdistance(lista,limit);
+    dealloclistname(lista);
+}
+
+void searchfunction(char *file, char *path){
+    listafile_t *lista=malloc(sizeof(listafile_t));
+    lista->nome=NULL;
+    lista=fileindir(lista,path);
+    int minimo=findminlist(lista,file);
+    printmindistance(lista,minimo);
+    dealloclistname(lista);
+}
+
+void dealloclistname(listafile_t *lista){
+    listafile_t *primo=lista;
+    lista=lista->next;
+    listafile_t *appoggio;
+    do{
+        appoggio=lista->next;
+        free(lista);
+        lista=appoggio;
+
+    }while(lista->next != primo);
+    free(primo);
+
+}

@@ -128,7 +128,6 @@ char *generatestring(vkey_t *x) {
         x->block = x->block->next;
     } while (appuno != x->block);
     dealloclist(x);
-  //  free(appuno);
     return s1;
 }
 
@@ -143,7 +142,6 @@ void dealloclist(vkey_t *x){
         appoggio = primo->next;
         free(primo);
         primo = appoggio;
-    };
-   // }while((*(appoggio->next)) != prova);
+    }
     free(x);
 }
